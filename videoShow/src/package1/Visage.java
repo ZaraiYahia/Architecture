@@ -1,8 +1,9 @@
 package package1;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
-public class Visage implements IObjetAnimable{
+public class Visage extends Forme{
 	// ---------------------------------------------------------
     // Les constantes de la classe Visage
     // ---------------------------------------------------------
@@ -42,12 +43,12 @@ public class Visage implements IObjetAnimable{
     /**
      * abscisse coin supérieur gauche du rectangle englobant le visage.
      */
-    private int xhg = 0;
+//    private int xhg = 0;
 
     /**
      * ordonnée coin supérieur gauche du rectangle englobant le visage.
      */
-    private int yhg = 0;
+//    private int yhg = 0;
 
     /**
      * largeur du visage.
@@ -122,10 +123,9 @@ public class Visage implements IObjetAnimable{
      * @see VisageRond#LARGEUR_DEFAUT
      * @see VisageRond#HAUTEUR_DEFAUT
      */
-    public Visage(Dessin d, int xg, int yg, int larg, int haut) {
+    public Visage(Dessin d,int x,int y , int larg, int haut) {
+    	super(x,y,5.0f,Color.BLACK,Color.PINK);
         this.d = d;
-        this.xhg = xg;
-        this.yhg = yg;
         this.largeur = Math.max(larg, LARGEUR_MIN);
         this.hauteur = Math.max(haut, HAUTEUR_MIN);
     }
@@ -194,10 +194,10 @@ public class Visage implements IObjetAnimable{
      * supérieur gauche du visage est modifiée en lui ajoutant le déplacement
      * élémentaire défini par dx et dy.
      */
-    public void deplacerSansRebond() {
-        xhg += dx;
-        yhg += dy;
-    }
+//    public void deplacerSansRebond() {
+//        xhg += dx;
+//        yhg += dy;
+//    }
 
     /**
      * Fait effectuer au visage un déplacement élementaire. La position du coin
@@ -205,16 +205,16 @@ public class Visage implements IObjetAnimable{
      * élémentaire défini par dx et dy. Si le visage dépasse de l'un des bords
      * de la zone de dessin il inverse sa direction de déplacement.
      */
-    @Override
-    public void deplacer() {
-        if (bordGaucheAtteint() || bordDroitAtteint()) {
-            inverserDx();
-        }
-        if (bordHautAtteint() || bordBasAtteint()) {
-            inverserDy();
-        }
-        deplacerSansRebond();
-    }
+//    @Override
+//    public void deplacer() {
+//        if (bordGaucheAtteint() || bordDroitAtteint()) {
+//            inverserDx();
+//        }
+//        if (bordHautAtteint() || bordBasAtteint()) {
+//            inverserDy();
+//        }
+//        deplacerSansRebond();
+//    }
 
     /**
      * Evalue si le visage atteint le bord gauche de la zône de dessin.
@@ -223,9 +223,9 @@ public class Visage implements IObjetAnimable{
      * le coté gauche de la zône de dessin, <code>
      *         false</code> sinon.
      */
-    public boolean bordGaucheAtteint() {
-        return (xhg < 0);
-    }
+//    public boolean bordGaucheAtteint() {
+//        return (xhg < 0);
+//    }
 
     /**
      * Evalue si le visage atteint le bord droit de la zône de dessin.
@@ -234,9 +234,9 @@ public class Visage implements IObjetAnimable{
      * le coté droit de la zône de dessin, <code>
      *         false</code> sinon.
      */
-    public boolean bordDroitAtteint() {
-        return ((xhg + largeur) > d.getLargeur());
-    }
+//    public boolean bordDroitAtteint() {
+//        return ((xhg + largeur) > d.getLargeur());
+//    }
 
     /**
      * Evalue si le visage atteint le bord haut de la zône de dessin.
@@ -245,9 +245,9 @@ public class Visage implements IObjetAnimable{
      * le coté haut de la zône de dessin, <code>
      *         false</code> sinon.
      */
-    public boolean bordHautAtteint() {
-        return (yhg < 0);
-    }
+//    public boolean bordHautAtteint() {
+//        return (yhg < 0);
+//    }
 
     /**
      * Evalue si le visage atteint le bord bas de la zône de dessin.
@@ -256,9 +256,9 @@ public class Visage implements IObjetAnimable{
      * le coté bas de la zône de dessin, <code>
      *         false</code> sinon.
      */
-    public boolean bordBasAtteint() {
-        return ((yhg + hauteur) >= d.getHauteur());
-    }
+//    public boolean bordBasAtteint() {
+//        return ((yhg + hauteur) >= d.getHauteur());
+//    }
 
     /**
      * Evalue si le visage atteint l'un des bords de la zône de dessin.
@@ -267,10 +267,10 @@ public class Visage implements IObjetAnimable{
      * l'un des cotés de la zône de dessin, <code>
      *         false</code> sinon.
      */
-    public boolean bordAtteint() {
-        return bordDroitAtteint() || bordGaucheAtteint() || bordHautAtteint()
-                || bordBasAtteint();
-    }
+//    public boolean bordAtteint() {
+//        return bordDroitAtteint() || bordGaucheAtteint() || bordHautAtteint()
+//                || bordBasAtteint();
+//    }
 
     /**
      * affiche le visage.
@@ -283,23 +283,23 @@ public class Visage implements IObjetAnimable{
      */
     public void dessiner(Graphics g) {
         // dessiner le contour du visage
-        g.drawOval(xhg, yhg, largeur, hauteur);
+        g.drawOval(super.x, super.y, largeur, hauteur);
 
         // dessiner la bouche
         if (impassible) {
-            g.drawLine(xhg + largeur / 4, yhg + (2 * hauteur) / 3,
-                    xhg + (3 * largeur) / 4, yhg + (2 * hauteur) / 3);
+            g.drawLine(super.x + largeur / 4, super.y + (2 * hauteur) / 3,
+                    super.x + (3 * largeur) / 4, super.y + (2 * hauteur) / 3);
         } else {
-            g.drawArc(xhg + largeur / 4, yhg + (2 * hauteur) / 3,
+            g.drawArc(super.x + largeur / 4, super.y + (2 * hauteur) / 3,
                     largeur / 2, hauteur / 5, -45, -90);
         }
 
         // dessiner les yeux
         int largeurOeil = largeur / 5;
         int hauteurOeil = hauteur / 5;
-        g.drawOval(xhg + largeurOeil, yhg + hauteurOeil, largeurOeil,
+        g.drawOval(super.x + largeurOeil, super.y + hauteurOeil, largeurOeil,
                 hauteurOeil);
-        g.drawOval(xhg + 3 * largeurOeil, yhg + hauteurOeil, largeurOeil,
+        g.drawOval(super.x + 3 * largeurOeil, super.y + hauteurOeil, largeurOeil,
                 hauteurOeil);
 
     }

@@ -36,12 +36,19 @@ public class LancerApp1 {
 		d.ajouterObjet(lesTrains[i]);
 		}
 		
-		Visage v = new Visage(d);
-		d.ajouterObjet(v);
-		Forme f1 = new Etoile(100,50,20,4.f,Color.RED,Color.YELLOW);
-		Forme f2 = new PolygoneRegulier(10,100,50,20,4.f,Color.BLACK,null);
+		Visage v = new Visage(d,300,500,45,60);
+//		d.ajouterObjet(v);
+		Forme f1 = new Etoile(100,50,20,4.f,Color.GREEN,Color.LIGHT_GRAY);
+		Forme f2 = new PolygoneRegulier(200,100,50,20,4.f,Color.BLACK,null);
+		
+		IFormeAnimable af1 = new MvtCirculaire(250,250,180,0,5);
+		IFormeAnimable af2 = new MvtCirculaire(210,200,180,0,10);
 		d.ajouterObjet(f1);
 		d.ajouterObjet(f2);
+		
+		d.ajouterObjet(new AnimationForme(f1,af1));
+		d.ajouterObjet(new AnimationForme(f2,af2));
+		d.ajouterObjet(new AnimationForme(v,af2));
 		
 		while(true) {
 		// la zone de dessin se r�affiche
