@@ -38,8 +38,10 @@ public class LancerApp1 {
 		
 		Visage v = new Visage(d);
 		d.ajouterObjet(v);
-//		Forme f = new Forme(d);
-//		d.ajouterObjet(e);
+		Forme f1 = new Etoile(100,50,20,4.f,Color.RED,Color.YELLOW);
+		Forme f2 = new PolygoneRegulier(10,100,50,20,4.f,Color.BLACK,null);
+		d.ajouterObjet(f1);
+		d.ajouterObjet(f2);
 		
 		while(true) {
 		// la zone de dessin se r�affiche
